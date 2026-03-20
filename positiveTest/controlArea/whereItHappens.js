@@ -1,6 +1,6 @@
 import { expect } from '@wdio/globals'
-import thePlaceILogIn from '../stuff/loggingIn'
-import weAreHere from '../stuff/weGotHere'
+import thePlaceILogIn from '../stuff/loggingIn.js'
+import weAreHere from '../stuff/weGotHere.js'
 
 describe('My Login application', () => {
     it('should login with valid credentials', async () => {

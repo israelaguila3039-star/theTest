@@ -1,5 +1,5 @@
 import { $ } from '@wdio/globals'
-import uRL from './theEndpointAtTheTop';
+import uRL from './theEndpointAtTheTop.js';
 
 class thePlaceILogIn extends uRL {
 
