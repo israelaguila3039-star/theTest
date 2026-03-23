@@ -23,7 +23,6 @@ async function theTestIng(username, password, passSelector, stringNeed, passText
                 await expect($(passSelector)).toHaveText(                    
                     expect.stringContaining(passText));
             }
-            
         })
     })
 
@@ -32,7 +31,8 @@ async function theTestIng(username, password, passSelector, stringNeed, passText
 
 //Positive Tests:
 
-for (i == 0; i < 6; i++){
+
+for (let i = 0; i < 6; i++){
     if (i == 1){
         theTestIng(usernames[i], "secret_sauce", '[class="error-message-container error"]', true, 'Epic sadface: Sorry, this user has been locked out.');
     } else if (i == 2 || i == 5) {
@@ -43,13 +43,33 @@ for (i == 0; i < 6; i++){
 }
 
 
+
 //Negative Tests:
 
+
 //Incorrect password
-theTestIng("standard_user", "ppppppp", '[class="error-message-container error"]', true, 'Epic sadface: Username and password do not match any user in this service')
-//Wrong username
-theTestIng("lockedoutuser", "secret_sauce", '[class="error-message-container error"]', true, 'Epic sadface: Username and password do not match any user in this service');
+for (let i = 0; i < 6; i++){
+    theTestIng(usernames[i], "ppppppp", '[class="error-message-container error"]', true, 'Epic sadface: Username and password do not match any user in this service');
+}
+
+//Removing "_" from username and created a value for it
+const _lessUsernames = usernames.map(str => { return str.replaceAll('_', '') });
+for (let i = 0; i < 6; i++){
+    theTestIng(_lessUsernames[i], "secret_sauce", '[class="error-message-container error"]', true, 'Epic sadface: Username and password do not match any user in this service');
+}
+
 //Wrong capitalization
-theTestIng("Problem_User", "Secret_Sauce", '[class="error-message-container error"]', true, 'Epic sadface: Username and password do not match any user in this service');
+const capiUsernames = usernames.map(element => { return element.toUpperCase() });
+//Note to self: Remember to put the [i] so that you do not take 20 minutes trying to solve an issue that does not actually exist
+for (let i = 0; i < 6; i++){
+    theTestIng(capiUsernames[i], "secret_sauce", '[class="error-message-container error"]', true, 'Epic sadface: Username and password do not match any user in this service');
+}
+
 //No password
-theTestIng("performance_glitch_user", "", '[class="app_logo"]', true, 'Swag Labs');
+for (let i = 0; i < 6; i++){
+    theTestIng(usernames[i], "", '[class="error-message-container error"]', true, 'Epic sadface: Password is required');
+}
+
+//No username
+theTestIng("", "secret_sauce", '[class="error-message-container error"]', true, 'Epic sadface: Username is required')
+
