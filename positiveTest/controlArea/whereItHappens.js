@@ -3,15 +3,13 @@ import { $ } from '@wdio/globals'
 import thePlaceILogIn from '../stuff/loggingIn.js'
 
 
+//All the valid usernames
+const usernames = ["standard_user", "locked_out_user", "problem_user", "performance_glitch_user", "error_user", "visual_user"];
+
 /**This function can control what is inputted for the password, username, the selector and the text within the selector
 *This is due to neeeding to run multiple tests where the username and password are different and the assertions are different
 *Notes: Errors can easily be caused by an update to the text, class names, src, etc...
 */
-
-//All the valid usernames
-const usernames = ["standard_user", "locked_out_user", "problem_user", "performance_glitch_user", "error_user", "visual_user"];
-
-
 async function theTestIngLogin(username, password, passSelector, stringNeed, passText) {    
     
     describe('My Login application', () => {
