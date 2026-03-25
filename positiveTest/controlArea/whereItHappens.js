@@ -1,6 +1,6 @@
 import { expect } from '@wdio/globals'
 import { $ } from '@wdio/globals'
-import selectors from '../stuff/whatPasses.js'
+import { selectors } from '../stuff/whatPasses.js'
 import thePlaceILogIn from '../stuff/loggingIn.js'
 import { allUsernames } from '../stuff/loggingIn.js'
 
@@ -31,7 +31,7 @@ async function theTestIngLogin(username, password, passSelector, stringNeed, pas
 //Login Positive Tests:
 
 
-allUsernames.validUser.forEach((username, i) => {
+allUsernames[0].forEach((username, i) => {
     if (i === 1) {
         theTestIngLogin(username, "secret_sauce", selectors.errorMessage, true, 'Epic sadface: Sorry, this user has been locked out.');
     } else if (i === 2 || i === 5) {
